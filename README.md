@@ -44,7 +44,7 @@ If you find our code or paper useful, please cite the paper:
 ```
 @article{Nijkamp2022ACP,
   title={A Conversational Paradigm for Program Synthesis},
-  author={Erik Nijkamp and Bo Pang and Hiroaki Hayashi and Lifu Tu and Huan Wang and Yingbo Zhou and Silvio Savarese and Caiming Xiong},
+  author={Nijkamp, Erik and Pang, Bo and Hayashi, Hiroaki and Tu, Lifu and Wang, Huan and Zhou, Yingbo and Savarese, Silvio and Xiong, Caiming},
   journal={arXiv preprint},
   year={2022}
 }
