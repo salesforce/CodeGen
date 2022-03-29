@@ -11,9 +11,7 @@ This repo inclues an official code release for the **CodeGen** models, as presen
 git clone https://github.com/salesforce/CodeGen
 cd CodeGen
 
-mkdir checkpoints
-cd checkpoints
-wget https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-350M-mono.tar.gz && tar -xzf codegen-350M-mono.tar.gz
+wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-350M-mono.tar.gz && tar -xvf checkpoints/codegen-350M-mono.tar.gz -C checkpoints/
 
 python3.8 -m venv .venv
 source .venv/bin/activate
