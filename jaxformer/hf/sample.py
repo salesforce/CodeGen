@@ -180,8 +180,8 @@ def main():
 
     # (0) constants
 
-    models_nl = ['codegen-350M-nl']
-    models_pl = ['codegen-350M-multi', 'codegen-350M-mono']
+    models_nl = []
+    models_pl = ['codegen-350M-mono', 'codegen-2B-mono', 'codegen-6B-mono', 'codegen-16B-mono']
     models = models_nl + models_pl
 
 

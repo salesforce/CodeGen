@@ -3,7 +3,7 @@
 </p>
 
 # CodeGen
-This repo inclues an official code release for the **CodeGen** models, as presented in the paper, [A Conversational Paradigm for Program Synthesis](https://arxiv.org/abs/2203.13474).
+This repo inclues an official code release for the **CodeGen** models, as presented in the paper, [A Conversational Paradigm for Program Synthesis](https://arxiv.org/abs/2203.13474), by Erik Nijkamp*, Bo Pang*, Hiroaki Hayashi*, Lifu Tu, Huan Wang, Yingbo Zhou, Silvio Savarese, and Caiming Xiong (* indicates equal contribution).
 
 
 ## Setup
@@ -12,6 +12,9 @@ git clone https://github.com/salesforce/CodeGen
 cd CodeGen
 
 wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-350M-mono.tar.gz && tar -xvf checkpoints/codegen-350M-mono.tar.gz -C checkpoints/
+wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-2B-mono.tar.gz && tar -xvf checkpoints/codegen-2B-mono.tar.gz -C checkpoints/
+wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-6B-mono.tar.gz && tar -xvf checkpoints/codegen-6B-mono.tar.gz -C checkpoints/
+wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-16B-mono.tar.gz && tar -xvf checkpoints/codegen-16B-mono.tar.gz -C checkpoints/
 
 python3.8 -m venv .venv
 source .venv/bin/activate
@@ -40,7 +43,7 @@ If you find our code or paper useful, please cite the paper:
 @article{Nijkamp2022ACP,
   title={A Conversational Paradigm for Program Synthesis},
   author={Erik Nijkamp and Bo Pang and Hiroaki Hayashi and Lifu Tu and Huan Wang and Yingbo Zhou and Silvio Savarese and Caiming Xiong},
-  journal={ arXiv preprint },
+  journal={arXiv preprint},
   year={2022}
 }
 ```
