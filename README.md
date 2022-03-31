@@ -3,7 +3,11 @@
 </p>
 
 # CodeGen
-This repo includes an official code release for the **CodeGen** models, as presented in the paper, [A Conversational Paradigm for Program Synthesis](https://arxiv.org/abs/2203.13474), by Erik Nijkamp*, Bo Pang*, Hiroaki Hayashi*, Lifu Tu, Huan Wang, Yingbo Zhou, Silvio Savarese, and Caiming Xiong (* indicates equal contribution).
+This repo includes an official code release for the **CodeGen** models, as presented in the paper:
+
+Title: [A Conversational Paradigm for Program Synthesis](https://arxiv.org/abs/2203.13474)
+
+Authors: [Erik Nijkamp](https://enijkamp.github.io/)\*, [Bo Pang](https://scholar.google.com/citations?user=s9fNEVEAAAAJ&hl=en)\*, [Hiroaki Hayashi](https://hiroakih.me/)\*, Lifu Tu, Huan Wang, Yingbo Zhou, Silvio Savarese, and Caiming Xiong (* indicates equal contribution).
 
 The current version releases the sampling code, while the detailed training code will be released soon.
 
