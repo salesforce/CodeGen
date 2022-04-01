@@ -16,6 +16,13 @@ Official release for the **CodeGen** models (`350M`, `2B`, `6B`, `16B`) for **Pr
 The current version releases the sampling code, while the detailed training code will be released soon.
 
 
+## Demo
+
+For ease of use, the 
+[Google Colab notebook](https://colab.research.google.com/drive/1fQI8OgzMAR0bquCrvhlAtXSw6iMFbVgI) allows for sampling from the **CodeGen** models (contributed by @Penguin-jpg).
+
+
+
 ## Setup
 ```sh
 git clone https://github.com/salesforce/CodeGen
