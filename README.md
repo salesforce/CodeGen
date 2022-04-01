@@ -3,7 +3,7 @@
 </p>
 
 # CodeGen
-This repo includes an official code release for the **CodeGen** models, as presented in the paper:
+Official release for the **CodeGen** models (`350M`, `2B`, `6B`, `16B`) for **Program Synthesis**, as presented in the paper:
 
 *Title*: [A Conversational Paradigm for Program Synthesis](https://arxiv.org/abs/2203.13474)
 
