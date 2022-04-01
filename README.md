@@ -19,7 +19,7 @@ The current version releases the sampling code, while the detailed training code
 ## Demo
 
 This 
-[Google Colab notebook](https://colab.research.google.com/drive/1fQI8OgzMAR0bquCrvhlAtXSw6iMFbVgI) allows for sampling from the **CodeGen** models (contributed by @Penguin-jpg).
+[Google Colab notebook](https://colab.research.google.com/drive/1fQI8OgzMAR0bquCrvhlAtXSw6iMFbVgI) allows for sampling from the CodeGen models (contributed by @Penguin-jpg).
 
 
 
