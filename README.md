@@ -2,7 +2,7 @@
   <img src="assets/codegen_logo.png" width="25%">
 </p>
 
-# CodeGen
+# [CodeGen](https://arxiv.org/abs/2006.09882) :  [![Open In Colab](https://camo.githubusercontent.com/84f0493939e0c4de4e6dbe113251b4bfb5353e57134ffd9fcab6b8714514d4d1/68747470733a2f2f636f6c61622e72657365617263682e676f6f676c652e636f6d2f6173736574732f636f6c61622d62616467652e737667)](https://colab.research.google.com/github/ashishpatel26/CodeGen/blob/main/example/Updated_Codegen_Interacting_withCodeGen.ipynb)
 Official release for the **CodeGen** models (`350M`, `2B`, `6B`, `16B`) for **Program Synthesis**, as presented in the paper:
 
 *Title*: [A Conversational Paradigm for Program Synthesis](https://arxiv.org/abs/2203.13474)
