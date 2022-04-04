@@ -12,7 +12,13 @@ import argparse
 import torch
 
 from transformers import GPT2TokenizerFast
-from jaxformer.hf.codegen.modeling_codegen import CodeGenForCausalLM
+# from jaxformer.hf.codegen.modeling_codegen import CodeGenForCausalLM
+
+import sys
+# insert at 1, 0 is the script path (or '' in REPL)
+sys.path.insert(1, '/CodeGen/jaxformer/hf/codegen/')
+
+import modeling_codegen
 
 
 
@@ -60,9 +66,9 @@ def cast(model, fp16=True):
 
 def create_model(ckpt, fp16=True):
     if fp16:
-        return CodeGenForCausalLM.from_pretrained(ckpt, revision='float16', torch_dtype=torch.float16, low_cpu_mem_usage=True)
+        return modeling_codegen.CodeGenForCausalLM.from_pretrained(ckpt, revision='float16', torch_dtype=torch.float16, low_cpu_mem_usage=True)
     else:
-        return CodeGenForCausalLM.from_pretrained(ckpt)
+        return modeling_codegen.CodeGenForCausalLM.from_pretrained(ckpt)
 
 
 def create_tokenizer():

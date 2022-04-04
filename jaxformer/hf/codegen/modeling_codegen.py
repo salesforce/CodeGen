@@ -29,7 +29,13 @@ from transformers.modeling_outputs import BaseModelOutputWithPast, CausalLMOutpu
 from transformers.modeling_utils import PreTrainedModel
 from transformers.utils import logging
 from transformers.utils.model_parallel_utils import assert_device_map, get_device_map
-from .configuration_codegen import CodeGenConfig
+# from .configuration_codegen import CodeGenConfig
+
+import sys
+# insert at 1, 0 is the script path (or '' in REPL)
+sys.path.insert(1, '/CodeGen/jaxformer/hf/codegen')
+
+import configuration_codegen
 
 
 logger = logging.get_logger(__name__)
@@ -287,7 +293,7 @@ class CodeGenPreTrainedModel(PreTrainedModel):
     models.
     """
 
-    config_class = CodeGenConfig
+    config_class = configuration_codegen.CodeGenConfig()
     base_model_prefix = "transformer"
     is_parallelizable = True
 
