@@ -108,6 +108,7 @@ def sample(
         context,
         truncation=True,
         padding=True,
+        max_length=max_length,
         return_tensors='pt',
     ).input_ids
 
