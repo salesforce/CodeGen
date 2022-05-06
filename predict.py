@@ -57,7 +57,6 @@ class Predictor(BasePredictor):
         max_length: int = Input(
             description="Maximum length of generated text", ge=0, le=1000, default=128
         ),
-        batch_size: int = Input(description="Batch size", ge=1, le=10, default=1),
     ) -> cog.Path:
         """Run a single prediction on the model"""
         set_env()
@@ -70,7 +69,7 @@ class Predictor(BasePredictor):
                 tokenizer=self.tokenizer,
                 context=context,
                 pad_token_id=self.pad,
-                num_return_sequences=batch_size,
+                num_return_sequences=1,
                 temp=temperature,
                 top_p=top_p,
                 max_length_sample=max_length,
