@@ -21,6 +21,7 @@ The current version releases the sampling code, while the detailed training code
 This 
 [Google Colab notebook](https://colab.research.google.com/drive/1fQI8OgzMAR0bquCrvhlAtXSw6iMFbVgI) allows for sampling from the CodeGen models (contributed by @Penguin-jpg).
 
+To run `codegn-6b-mono` you can use the demo at [replicate](https://replicate.com/salesforce/codgen).
 
 
 ## Setup
