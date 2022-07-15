@@ -197,7 +197,7 @@ def main():
     parser.add_argument('--t', type=float, default=0.2)
     parser.add_argument('--max-length', type=int, default=128)
     parser.add_argument('--batch-size', type=int, default=1)
-    parser.add_argument('--no-fp16', action="store_false")
+    parser.add_argument('--no-fp16', action="store_true")
     parser.add_argument('--pad', type=int, default=50256)
     parser.add_argument('--context', type=str, default='def helloworld():')
     args = parser.parse_args()
@@ -207,13 +207,14 @@ def main():
 
     set_env()
     set_seed(args.rng_seed, deterministic=args.rng_deterministic)
-
     device = torch.device(args.device)
-    if device.type == "cpu":
-        args.no_fp16 = False
+    
+    use_fp16 = True
+    if (args.no_fp16 or device.type == "cpu"):
+        use_fp16 = False
 
     if args.model.startswith("codegen-16B"):
-        args.no_fp16 = True
+        use_fp16 = True
 
     ckpt = f'./checkpoints/{args.model}'
 
@@ -221,7 +222,7 @@ def main():
     # (3) load
 
     with print_time('loading parameters'):
-        model = create_model(ckpt=ckpt, fp16=args.no_fp16).to(device)
+        model = create_model(ckpt=ckpt, fp16=use_fp16).to(device)
 
 
     with print_time('loading tokenizer'):
