@@ -15,11 +15,24 @@ Official release for the **CodeGen** models (`350M`, `2B`, `6B`, `16B`) for **Pr
 
 The current version releases the sampling code, while the detailed training code will be released soon.
 
+## HuggingFace
 
-## Demo
+The model is available on the [HuggingFace Hub](https://huggingface.co/models?search=salesforce+codegen) with a Colab demo [here](https://colab.research.google.com/drive/11YU00W-JLNXn-3YckJGOSxFf_TQfCXYr?usp=sharing).
+
+```python
+import torch
+from transformers import AutoTokenizer, AutoModelForCausalLM
+tokenizer = AutoTokenizer.from_pretrained("Salesforce/codegen-2B-mono")
+model = AutoModelForCausalLM.from_pretrained("Salesforce/codegen-2B-mono")
+inputs = tokenizer("# this function prints hello world", return_tensors="pt").to(0)
+sample = model.generate(**inputs, max_length=128)
+print(tokenizer.decode(sample[0], truncate_before_pattern=[r"\n\n^#", "^'''", "\n\n\n"]))
+```
+
+## Colab
 
 This 
-[Google Colab notebook](https://colab.research.google.com/drive/1fQI8OgzMAR0bquCrvhlAtXSw6iMFbVgI) allows for sampling from the CodeGen models (contributed by @Penguin-jpg).
+[Google Colab notebook](https://colab.research.google.com/drive/1fQI8OgzMAR0bquCrvhlAtXSw6iMFbVgI) allows for sampling from the CodeGen models.
 
 
 
