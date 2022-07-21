@@ -34,6 +34,7 @@ print(tokenizer.decode(sample[0], truncate_before_pattern=[r"\n\n^#", "^'''", "\
 This 
 [Google Colab notebook](https://colab.research.google.com/drive/1fQI8OgzMAR0bquCrvhlAtXSw6iMFbVgI) allows for sampling from the CodeGen models.
 
+To run `codegn-6b-mono` you can use the demo at [replicate](https://replicate.com/salesforce/codgen).
 
 
 ## Setup
