@@ -79,7 +79,7 @@ codegen-{model-size}-{data}
 
 `data` has 3 options: `nl`, `multi`, `mono`.
 
-* `nl` models are randomly initialized and trained on [The Pile](https://github.com/EleutherAI/the-pile), a 825.18 GB English text corpous.
+* `nl` models are randomly initialized and trained on [The Pile](https://github.com/EleutherAI/the-pile), a 825.18 GB English text corpus.
 * `multi` models are initialized from `nl` models and then trained on a corpus with code data consisting of multiple programming languages.
 * `mono` models are initialized from `multi` models and then trained on a corpus with Python code data.
 
