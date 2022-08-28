@@ -61,12 +61,14 @@ wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoi
 
 # create a virtual environment with requirements
 python3.8 -m venv .venv
+
 source .venv/bin/activate
+
 pip3 install --upgrade pip setuptools
 pip3 install -r requirements.txt
 
 # sample from the model with an arbitrary context
-python3 -m jaxformer.hf.sample --model codegen-350M-mono --context "def hello_world():"
+python3.8 -m jaxformer.hf.sample --model codegen-350M-mono --context "def hello_world():"
 ```
 
 ## Released Models

@@ -48,8 +48,8 @@ def set_seed(seed, deterministic=True):
 
 
 def cast(model, fp16=True):
-    if fp16:
-        model.half()
+    # if fp16:
+    #     model.half()
     return model
 
 
@@ -58,10 +58,10 @@ def cast(model, fp16=True):
 # model
 
 
-def create_model(ckpt, fp16=True):
-    if fp16:
-        return CodeGenForCausalLM.from_pretrained(ckpt, revision='float16', torch_dtype=torch.float16, low_cpu_mem_usage=True)
-    else:
+def create_model(ckpt, fp16=False):
+    # if fp16:
+    #     return CodeGenForCausalLM.from_pretrained(ckpt, revision='float16', torch_dtype=torch.float16, low_cpu_mem_usage=True)
+    # else:
         return CodeGenForCausalLM.from_pretrained(ckpt)
 
 
@@ -92,7 +92,6 @@ def create_custom_gpt2_tokenizer():
 # sample
 
 def sample(
-    device,
     model,
     tokenizer,
     context,
@@ -116,7 +115,7 @@ def sample(
     assert input_ids_len < max_length
 
     with torch.no_grad():
-        input_ids = input_ids.to(device)
+        input_ids = input_ids.to()
         tokens = model.generate(
             input_ids,
             do_sample=True,
@@ -190,7 +189,7 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--model', type=str, choices=models, default='codegen-350M-mono')
-    parser.add_argument('--device', type=str, default='cuda:0')
+    # parser.add_argument('--device', type=str, default='cuda:0')
     parser.add_argument('--rng-seed', type=int, default=42)
     parser.add_argument('--rng-deterministic', type=bool, default=True)
     parser.add_argument('--p', type=float, default=0.95)
@@ -207,14 +206,14 @@ def main():
 
     set_env()
     set_seed(args.rng_seed, deterministic=args.rng_deterministic)
-    device = torch.device(args.device)
+    # device = torch.device(args.device)
     
-    use_fp16 = True
-    if (args.no_fp16 or device.type == "cpu"):
-        use_fp16 = False
-
-    if args.model.startswith("codegen-16B"):
-        use_fp16 = True
+    # use_fp16 = True
+    # if (args.no_fp16):
+    #     use_fp16 = False
+    #
+    # if args.model.startswith("codegen-16B"):
+    #     use_fp16 = True
 
     ckpt = f'./checkpoints/{args.model}'
 
@@ -222,7 +221,7 @@ def main():
     # (3) load
 
     with print_time('loading parameters'):
-        model = create_model(ckpt=ckpt, fp16=use_fp16).to(device)
+        model = create_model(ckpt=ckpt, fp16=False).to()
 
 
     with print_time('loading tokenizer'):
@@ -237,7 +236,7 @@ def main():
     # (4) sample
 
     with print_time('sampling'):
-        completion = sample(device=device, model=model, tokenizer=tokenizer, context=args.context, pad_token_id=args.pad, num_return_sequences=args.batch_size, temp=args.t, top_p=args.p, max_length_sample=args.max_length)[0]
+        completion = sample(model=model, tokenizer=tokenizer, context=args.context, pad_token_id=args.pad, num_return_sequences=args.batch_size, temp=args.t, top_p=args.p, max_length_sample=args.max_length)[0]
         truncation = truncate(completion)
 
         print('=' * 100)
