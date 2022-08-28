@@ -38,6 +38,8 @@ This
 
 ## Setup
 ```sh
+pip3 install git+https://github.com/huggingface/transformers.git
+
 git clone https://github.com/salesforce/CodeGen
 cd CodeGen
 
@@ -69,6 +71,10 @@ pip3 install -r requirements.txt
 
 # sample from the model with an arbitrary context
 python3.8 -m jaxformer.hf.sample --model codegen-350M-mono --context "def hello_world():"
+
+python3.8 -m jaxformer.hf.sample --model codegen-350M-mono --context "recursive visit a category tree"
+
+python3.8 -m jaxformer.hf.sample --model codegen-350M-mono --context "# this function Merge 2 binary trees"
 ```
 
 ## Released Models
