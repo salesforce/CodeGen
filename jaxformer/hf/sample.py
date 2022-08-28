@@ -15,7 +15,6 @@ from transformers import GPT2TokenizerFast
 from jaxformer.hf.codegen.modeling_codegen import CodeGenForCausalLM
 
 
-
 ########################################################################
 # util
 
@@ -29,7 +28,7 @@ class print_time:
         self.t = time.time()
 
     def __exit__(self, type, value, traceback):
-        print(f'{self.desc} took {time.time()-self.t:.02f}s')
+        print(f'{self.desc} took {time.time() - self.t:.02f}s')
 
 
 def set_env():
@@ -53,7 +52,6 @@ def cast(model, fp16=True):
     return model
 
 
-
 ########################################################################
 # model
 
@@ -62,7 +60,7 @@ def create_model(ckpt, fp16=False):
     # if fp16:
     #     return CodeGenForCausalLM.from_pretrained(ckpt, revision='float16', torch_dtype=torch.float16, low_cpu_mem_usage=True)
     # else:
-        return CodeGenForCausalLM.from_pretrained(ckpt)
+    return CodeGenForCausalLM.from_pretrained(ckpt)
 
 
 def create_tokenizer():
@@ -92,17 +90,16 @@ def create_custom_gpt2_tokenizer():
 # sample
 
 def sample(
-    model,
-    tokenizer,
-    context,
-    pad_token_id,
-    num_return_sequences=1,
-    temp=0.2,
-    top_p=0.95,
-    max_length_sample=128,
-    max_length=2048
+        model,
+        tokenizer,
+        context,
+        pad_token_id,
+        num_return_sequences=1,
+        temp=0.2,
+        top_p=0.95,
+        max_length_sample=128,
+        max_length=2048
 ):
-
     input_ids = tokenizer(
         context,
         truncation=True,
@@ -132,7 +129,6 @@ def sample(
 
 
 def truncate(completion):
-
     def find_re(string, pattern, start_pos):
         m = pattern.search(string, start_pos)
         return m.start() if m else -1
@@ -166,30 +162,22 @@ def truncate(completion):
         return completion
 
 
-def test_truncate():
-
-    assert truncate('\nif len_a > len_b:\n    result = a\nelse:\n    result = b\n\n\n\n#') == '\nif len_a > len_b:\n    result = a\nelse:\n    result = b'
-
-
-
 ########################################################################
 # main
 
-
 def main():
-
     # (0) constants
 
     models_nl = ['codegen-350M-nl', 'codegen-2B-nl', 'codegen-6B-nl', 'codegen-16B-nl']
-    models_pl = ['codegen-350M-multi', 'codegen-2B-multi', 'codegen-6B-multi', 'codegen-16B-multi', 'codegen-350M-mono', 'codegen-2B-mono', 'codegen-6B-mono', 'codegen-16B-mono']
-    models = models_nl + models_pl
+    models_pl = ['codegen-350M-multi', 'codegen-2B-multi', 'codegen-6B-multi', 'codegen-16B-multi', 'codegen-350M-mono',
+                 'codegen-2B-mono', 'codegen-6B-mono', 'codegen-16B-mono']
 
+    models = models_nl + models_pl
 
     # (1) params
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--model', type=str, choices=models, default='codegen-350M-mono')
-    # parser.add_argument('--device', type=str, default='cuda:0')
     parser.add_argument('--rng-seed', type=int, default=42)
     parser.add_argument('--rng-deterministic', type=bool, default=True)
     parser.add_argument('--p', type=float, default=0.95)
@@ -201,28 +189,17 @@ def main():
     parser.add_argument('--context', type=str, default='def helloworld():')
     args = parser.parse_args()
 
-
     # (2) preamble
 
     set_env()
     set_seed(args.rng_seed, deterministic=args.rng_deterministic)
-    # device = torch.device(args.device)
-    
-    # use_fp16 = True
-    # if (args.no_fp16):
-    #     use_fp16 = False
-    #
-    # if args.model.startswith("codegen-16B"):
-    #     use_fp16 = True
 
     ckpt = f'./checkpoints/{args.model}'
-
 
     # (3) load
 
     with print_time('loading parameters'):
         model = create_model(ckpt=ckpt, fp16=False).to()
-
 
     with print_time('loading tokenizer'):
         if args.model in models_pl:
@@ -232,22 +209,22 @@ def main():
         tokenizer.padding_side = 'left'
         tokenizer.pad_token = args.pad
 
-
     # (4) sample
 
     with print_time('sampling'):
-        completion = sample(model=model, tokenizer=tokenizer, context=args.context, pad_token_id=args.pad, num_return_sequences=args.batch_size, temp=args.t, top_p=args.p, max_length_sample=args.max_length)[0]
+        completion = sample(model=model, tokenizer=tokenizer, context=args.context, pad_token_id=args.pad,
+                            num_return_sequences=args.batch_size, temp=args.t, top_p=args.p,
+                            max_length_sample=args.max_length)[0]
+
         truncation = truncate(completion)
 
         print('=' * 100)
         print(completion)
         print('=' * 100)
-        print(args.context+truncation)
+        print(args.context + truncation)
         print('=' * 100)
 
 
-
 if __name__ == '__main__':
-    test_truncate()
     main()
     print('done.')
