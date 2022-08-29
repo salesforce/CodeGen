@@ -97,8 +97,8 @@ def sample(
         num_return_sequences=1,
         temp=0.2,
         top_p=0.95,
-        max_length_sample=128,
-        max_length=2048
+        max_length_sample=8192,
+        max_length=8192
 ):
     input_ids = tokenizer(
         context,
@@ -182,7 +182,7 @@ def main():
     parser.add_argument('--rng-deterministic', type=bool, default=True)
     parser.add_argument('--p', type=float, default=0.95)
     parser.add_argument('--t', type=float, default=0.2)
-    parser.add_argument('--max-length', type=int, default=128)
+    parser.add_argument('--max-length', type=int, default=8192)
     parser.add_argument('--batch-size', type=int, default=1)
     parser.add_argument('--no-fp16', action="store_true")
     parser.add_argument('--pad', type=int, default=50256)

@@ -46,11 +46,11 @@ cd CodeGen
 # download the model parameters
 # codegen-350M-nl,multi,mono
 # wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-350M-nl.tar.gz && tar -xvf checkpoints/codegen-350M-nl.tar.gz -C checkpoints/
-# wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-350M-multi.tar.gz && tar -xvf checkpoints/codegen-350M-multi.tar.gz -C checkpoints/
+wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-350M-multi.tar.gz && tar -xvf checkpoints/codegen-350M-multi.tar.gz -C checkpoints/
 wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-350M-mono.tar.gz && tar -xvf checkpoints/codegen-350M-mono.tar.gz -C checkpoints/
 # codegen-2B-nl,multi,mono
 # wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-2B-nl.tar.gz && tar -xvf checkpoints/codegen-2B-nl.tar.gz -C checkpoints/
-# wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-2B-multi.tar.gz && tar -xvf checkpoints/codegen-2B-multi.tar.gz -C checkpoints/
+wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-2B-multi.tar.gz && tar -xvf checkpoints/codegen-2B-multi.tar.gz -C checkpoints/
 wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-2B-mono.tar.gz && tar -xvf checkpoints/codegen-2B-mono.tar.gz -C checkpoints/
 # codegen-6B-nl,multi,mono
 # wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-6B-nl.tar.gz && tar -xvf checkpoints/codegen-6B-nl.tar.gz -C checkpoints/
@@ -74,7 +74,28 @@ python3.8 -m jaxformer.hf.sample --model codegen-350M-mono --context "def hello_
 
 python3.8 -m jaxformer.hf.sample --model codegen-350M-mono --context "recursive visit a category tree"
 
-python3.8 -m jaxformer.hf.sample --model codegen-350M-mono --context "# this function Merge 2 binary trees"
+
+python3.8 -m jaxformer.hf.sample --model codegen-350M-multi --context "func RecursiveVisitCategoryTree"
+
+python3.8 -m jaxformer.hf.sample --model codegen-2B-multi --context "func RecursiveVisitCategoryTree"
+
+
+python3.8 -m jaxformer.hf.sample --model codegen-350M-multi --context "func MergeBinaryTree"
+
+python3.8 -m jaxformer.hf.sample --model codegen-2B-multi --context "func MergeBinaryTree"
+
+```
+
+```go 
+func RecursiveVisitCategoryTree(root *CategoriesTreeNode, callback func(CategoryTreeNode)) {
+        for _, category := range root.Children {
+                callback(category)
+                RecursiveVisitCategoryTree(category, callback)
+        }
+}
+
+
+
 ```
 
 ## Released Models
