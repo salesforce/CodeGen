@@ -179,7 +179,7 @@ def main():
     # (1) params
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model', type=str, choices=models, default='codegen-350M-mono')
+    parser.add_argument('--model', type=str, choices=models, default='codegen-350M-multi')
     parser.add_argument('--rng-seed', type=int, default=42)
     parser.add_argument('--rng-deterministic', type=bool, default=True)
     parser.add_argument('--p', type=float, default=0.95)
@@ -188,7 +188,7 @@ def main():
     parser.add_argument('--batch-size', type=int, default=1)
     parser.add_argument('--no-fp16', action="store_true")
     parser.add_argument('--pad', type=int, default=50256)
-    parser.add_argument('--context', type=str, default='def helloworld():')
+    parser.add_argument('--context', type=str, default='func HelloWorld()')
     args = parser.parse_args()
 
     # (2) preamble
