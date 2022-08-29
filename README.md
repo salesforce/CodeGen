@@ -54,11 +54,11 @@ wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoi
 wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-2B-mono.tar.gz && tar -xvf checkpoints/codegen-2B-mono.tar.gz -C checkpoints/
 # codegen-6B-nl,multi,mono
 # wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-6B-nl.tar.gz && tar -xvf checkpoints/codegen-6B-nl.tar.gz -C checkpoints/
-# wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-6B-multi.tar.gz && tar -xvf checkpoints/codegen-6B-multi.tar.gz -C checkpoints/
+wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-6B-multi.tar.gz && tar -xvf checkpoints/codegen-6B-multi.tar.gz -C checkpoints/
 wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-6B-mono.tar.gz && tar -xvf checkpoints/codegen-6B-mono.tar.gz -C checkpoints/
 # codegen-16B-nl,multi,mono
 # wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-16B-nl.tar.gz && tar -xvf checkpoints/codegen-16B-nl.tar.gz -C checkpoints/
-# wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-16B-multi.tar.gz && tar -xvf checkpoints/codegen-16B-multi.tar.gz -C checkpoints/
+wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-16B-multi.tar.gz && tar -xvf checkpoints/codegen-16B-multi.tar.gz -C checkpoints/
 wget -P checkpoints https://storage.googleapis.com/sfr-codegen-research/checkpoints/codegen-16B-mono.tar.gz && tar -xvf checkpoints/codegen-16B-mono.tar.gz -C checkpoints/
 
 # create a virtual environment with requirements
@@ -74,19 +74,45 @@ python3.8 -m jaxformer.hf.sample --model codegen-350M-mono --context "def hello_
 
 python3.8 -m jaxformer.hf.sample --model codegen-350M-mono --context "recursive visit a category tree"
 
-
 python3.8 -m jaxformer.hf.sample --model codegen-350M-multi --context "func RecursiveVisitCategoryTree"
+python3.8 -m jaxformer.hf.sample --model codegen-350M-multi --context "func KMP"
+python3.8 -m jaxformer.hf.sample --model codegen-350M-multi --context "func ReverseSlice"
+python3.8 -m jaxformer.hf.sample --model codegen-350M-multi --context "func InsertRedBlackTree"
+python3.8 -m jaxformer.hf.sample --model codegen-350M-multi --context "func SearchSkipList"
+python3.8 -m jaxformer.hf.sample --model codegen-350M-multi --context "func MergeBinaryTree"
+python3.8 -m jaxformer.hf.sample --model codegen-350M-multi --context "func BatchGetRecordsByIdList"
 
 python3.8 -m jaxformer.hf.sample --model codegen-2B-multi --context "func RecursiveVisitCategoryTree"
-
-
-python3.8 -m jaxformer.hf.sample --model codegen-350M-multi --context "func MergeBinaryTree"
-
+python3.8 -m jaxformer.hf.sample --model codegen-2B-multi --context "func KMP"
+python3.8 -m jaxformer.hf.sample --model codegen-2B-multi --context "func ReverseSlice"
 python3.8 -m jaxformer.hf.sample --model codegen-2B-multi --context "func MergeBinaryTree"
+python3.8 -m jaxformer.hf.sample --model codegen-2B-multi --context "func SearchSkipList"
+python3.8 -m jaxformer.hf.sample --model codegen-2B-multi --context "func SortMapByValue"
+python3.8 -m jaxformer.hf.sample --model codegen-2B-multi --context "func SortSlice"
+python3.8 -m jaxformer.hf.sample --model codegen-2B-multi --context "func BatchGetRecordsByIdList"
+
+python3.8 -m jaxformer.hf.sample --model codegen-6B-multi --context "func HelloWord"
+python3.8 -m jaxformer.hf.sample --model codegen-6B-multi --context "func InsertRedBlackTree"
+python3.8 -m jaxformer.hf.sample --model codegen-6B-multi --context "func RecursiveVisitCategoryTree"
+python3.8 -m jaxformer.hf.sample --model codegen-6B-multi --context "func MergeBinaryTree"
 
 ```
 
+
+# code generated
+
 ```go 
+
+func HelloWorld() string {
+        return "Hello World!"
+}
+
+func main() {
+        hello := HelloWorld()
+        fmt.Println(hello)
+}
+
+
 func RecursiveVisitCategoryTree(root *CategoriesTreeNode, callback func(CategoryTreeNode)) {
         for _, category := range root.Children {
                 callback(category)
@@ -94,7 +120,60 @@ func RecursiveVisitCategoryTree(root *CategoriesTreeNode, callback func(Category
         }
 }
 
+// 350M - 115s
+func ReverseSlice(a []int) []int {
+        b := make([]int, len(a))
+        copy(b, a)
+        for i := len(a) - 1; i >= 0; i-- {
+                b[i], b[i+1] = b[i+1], b[i]
+        }
+        return b
+}
 
+// 2B - 354s
+func ReverseSlice(s []int) []int {
+        for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
+                s[i], s[j] = s[j], s[i]
+        }
+        return s
+}
+
+
+// 2B - 355s
+func MergeBinaryTree(root *TreeNode, left *TreeNode, right *TreeNode) *TreeNode {
+        if root == nil {
+                return root
+        }
+        if left == nil {
+                return root
+        }
+        if right == nil {
+                return root
+        }
+        if left.Val < right.Val {
+                root.Val = left.Val
+                root.Left = MergeBinaryTree(root.Left, left, right)
+        } else {
+                root.Val = right.Val
+                root.Right = MergeBinaryTree(root.Right, left, right)
+        }
+        return root
+}
+
+func main() {
+        root := &TreeNode{Val: 1}
+        root.Left = &TreeNode{Val: 2}
+        root.Right = &TreeNode{Val: 3}
+        root.Left.Left = &TreeNode{Val: 4}
+        root.Left.Right = &TreeNode{Val: 5}
+        root.Right.Left = &TreeNode{Val: 6}
+        root.Right.Right = &TreeNode{Val: 7}
+        fmt.Println(root)
+        fmt.Println(MergeBinaryTree(root, root.Left, root.Right))
+}
+
+====================================================================================================
+sampling took 355.50s
 
 ```
 
