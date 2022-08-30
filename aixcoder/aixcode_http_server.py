@@ -50,6 +50,7 @@ class AIX1Handler(tornado.web.RequestHandler):
         print(f'request:{self.request.full_url()}')
         x = self.get_argument('x')
         y = yield self.aixcode(x)
+        print(y)
         self.write(y)
 
     @tornado.gen.coroutine
@@ -60,6 +61,7 @@ class AIX1Handler(tornado.web.RequestHandler):
         print(f'request:{body_json}')
         x = body_json.get("x")
         y = yield self.aixcode(x)
+        print(y)
         self.write(y)
 
 
@@ -76,6 +78,7 @@ class AIX2Handler(tornado.web.RequestHandler):
         print(f'request:{self.request.full_url()}')
         x = self.get_argument('x')
         y = yield self.aixcode(x)
+        print(y)
         self.write(y)
 
     @tornado.gen.coroutine
@@ -86,6 +89,7 @@ class AIX2Handler(tornado.web.RequestHandler):
         print(f'request:{body_json}')
         x = body_json.get("x")
         y = yield self.aixcode(x)
+        print(y)
         self.write(y)
 
 
