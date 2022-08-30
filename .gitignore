@@ -1,0 +1,7 @@
+.dist
+.venv
+.vscode
+/.vscode
+venv
+/.venv/
+/.dist/

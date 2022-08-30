@@ -8,54 +8,58 @@ import tornado.ioloop
 import tornado.web
 import json
 
-from jaxformer.hf.aixcode import AIXCode
+from aixcoder.aixcode import AIXCode
 
 AIXCode1 = AIXCode('codegen-350M-multi')
 AIXCode2 = AIXCode('codegen-2B-multi')
 
 
+def get_body_json(body):
+    body_decode = body.decode()
+    body_json = json.loads(body_decode)
+    return body_json
+
+
 class PingHandler(tornado.web.RequestHandler):
     def get(self):
-        print(f'request:{json.dumps(self.request.body)}')
+        print(f'request:{self.request.full_url()}')
         self.write("Pong!")
 
     def post(self):
-        print(f'request:{json.dumps(self.request.body)}')
+        body_json = get_body_json(self.request.body)
+        print(f'request:{body_json}')
         self.write("Pong!")
 
 
 class AIX1Handler(tornado.web.RequestHandler):
     def get(self):
         """get请求"""
-        print(f'request:{json.dumps(self.request.body)}')
-        input = self.get_argument('input')
-        self.write(AIXCode1.aixcode(input))
+        print(f'request:{self.request.full_url()}')
+        x = self.get_argument('x')
+        self.write(AIXCode1.aixcode(x))
 
     def post(self):
         '''post请求'''
-        print(f'request:{json.dumps(self.request.body)}')
-        body = self.request.body
-        body_decode = body.decode()
-        body_json = json.loads(body_decode)
-        input = body_json.get("input")
-        self.write(AIXCode1.aixcode(input))
+        body_json = get_body_json(self.request.body)
+        print(f'request:{body_json}')
+
+        x = body_json.get("x")
+        self.write(AIXCode1.aixcode(x))
 
 
 class AIX2Handler(tornado.web.RequestHandler):
     def get(self):
         """get请求"""
-        print(f'request:{json.dumps(self.request.body)}')
-        input = self.get_argument('input')
-        self.write(AIXCode2.aixcode(input))
+        print(f'request:{self.request.full_url()}')
+        x = self.get_argument('x')
+        self.write(AIXCode2.aixcode(x))
 
     def post(self):
         '''post请求'''
-        print(f'request:{json.dumps(self.request.body)}')
-        body = self.request.body
-        body_decode = body.decode()
-        body_json = json.loads(body_decode)
-        input = body_json.get("input")
-        self.write(AIXCode2.aixcode(input))
+        body_json = get_body_json(self.request.body)
+        print(f'request:{body_json}')
+        x = body_json.get("x")
+        self.write(AIXCode2.aixcode(x))
 
 
 if __name__ == "__main__":
@@ -67,7 +71,7 @@ if __name__ == "__main__":
     ])
 
     # 监听端口
-    port = 8868
+    port = 8888
     app.listen(port)
     print(f'AIXCoder Started, Listening on Port:{port}')
     # 启动应用程序

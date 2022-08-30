@@ -3,22 +3,24 @@
 # SPDX-License-Identifier: BSD-3-Clause
 # For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
 
+# models_nl = ['codegen-350M-nl', 'codegen-2B-nl', 'codegen-6B-nl', 'codegen-16B-nl']
+# models_pl = ['codegen-350M-multi', 'codegen-2B-multi', 'codegen-6B-multi', 'codegen-16B-multi',
+#              'codegen-350M-mono',
+#              'codegen-2B-mono', 'codegen-6B-mono', 'codegen-16B-mono']
+
 import os
 import re
 import time
 import random
-import argparse
 
 import torch
 
 from transformers import GPT2TokenizerFast
-from jaxformer.hf.codegen.modeling_codegen import CodeGenForCausalLM
+from aixcoder.codegen.modeling_codegen import CodeGenForCausalLM
 
 
 ########################################################################
 # util
-
-
 class print_time:
     def __init__(self, desc):
         self.desc = desc
@@ -90,6 +92,7 @@ def create_custom_gpt2_tokenizer():
 # sample
 
 MAX_LENGTH_SAMPLE = 512
+
 
 def sample(
         model,
@@ -164,69 +167,38 @@ def truncate(completion):
         return completion
 
 
-########################################################################
-# main
+class AIXCode:
+    def __init__(self, model_name):
+        # preamble
+        set_env()
+        set_seed(42, deterministic=True)
 
-def main():
-    # (0) constants
+        ckpt = f'/Users/bytedance/githubcode/CodeGen/checkpoints/{model_name}'
 
-    models_nl = ['codegen-350M-nl', 'codegen-2B-nl', 'codegen-6B-nl', 'codegen-16B-nl']
-    models_pl = ['codegen-350M-multi', 'codegen-2B-multi', 'codegen-6B-multi', 'codegen-16B-multi', 'codegen-350M-mono',
-                 'codegen-2B-mono', 'codegen-6B-mono', 'codegen-16B-mono']
+        # load
+        with print_time(f'{model_name} loading parameters'):
+            model = create_model(ckpt=ckpt, fp16=False).to()
 
-    models = models_nl + models_pl
-
-    # (1) params
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--model', type=str, choices=models, default='codegen-350M-multi')
-    parser.add_argument('--rng-seed', type=int, default=42)
-    parser.add_argument('--rng-deterministic', type=bool, default=True)
-    parser.add_argument('--p', type=float, default=0.95)
-    parser.add_argument('--t', type=float, default=0.2)
-    parser.add_argument('--max-length', type=int, default=MAX_LENGTH_SAMPLE)
-    parser.add_argument('--batch-size', type=int, default=1)
-    parser.add_argument('--no-fp16', action="store_true")
-    parser.add_argument('--pad', type=int, default=50256)
-    parser.add_argument('--context', type=str, default='func HelloWorld()')
-    args = parser.parse_args()
-
-    # (2) preamble
-
-    set_env()
-    set_seed(args.rng_seed, deterministic=args.rng_deterministic)
-
-    ckpt = f'./checkpoints/{args.model}'
-
-    # (3) load
-
-    with print_time('loading parameters'):
-        model = create_model(ckpt=ckpt, fp16=False).to()
-
-    with print_time('loading tokenizer'):
-        if args.model in models_pl:
+        with print_time(f'{model_name} loading tokenizer'):
             tokenizer = create_custom_gpt2_tokenizer()
-        else:
-            tokenizer = create_tokenizer()
-        tokenizer.padding_side = 'left'
-        tokenizer.pad_token = args.pad
+            tokenizer.padding_side = 'left'
+            tokenizer.pad_token = 50256
 
-    # (4) sample
+        self.model = model
+        self.tokenizer = tokenizer
 
-    with print_time('sampling'):
-        completion = sample(model=model, tokenizer=tokenizer, context=args.context, pad_token_id=args.pad,
-                            num_return_sequences=args.batch_size, temp=args.t, top_p=args.p,
-                            max_length_sample=args.max_length)[0]
+    def aixcode(self, context_string):
+        # sample
+        with print_time(f'{context_string} ... AIXCoding >>>'):
+            completion = sample(model=self.model,
+                                tokenizer=self.tokenizer,
+                                context=context_string,
+                                pad_token_id=50256,
+                                num_return_sequences=1,
+                                temp=0.2,
+                                top_p=0.95,
+                                max_length_sample=MAX_LENGTH_SAMPLE)[0]
 
-        truncation = truncate(completion)
+            truncation = truncate(completion)
 
-        print('=' * 100)
-        print(completion)
-        print('=' * 100)
-        print(args.context + truncation)
-        print('=' * 100)
-
-
-if __name__ == '__main__':
-    main()
-    print('done.')
+            return context_string + truncation
