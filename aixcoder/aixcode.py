@@ -88,10 +88,12 @@ def create_custom_gpt2_tokenizer():
     return t
 
 
-########################################################################
-# sample
-
+#######################################################################
+# sample params
 MAX_LENGTH_SAMPLE = 512
+TOP_P = 0.95
+TEMPERATURE = 0.7
+NUM_RETURN_SEQUENCES = 3
 
 
 def sample(
@@ -99,9 +101,9 @@ def sample(
         tokenizer,
         context,
         pad_token_id,
-        num_return_sequences=1,
-        temp=0.2,
-        top_p=0.95,
+        num_return_sequences=NUM_RETURN_SEQUENCES,
+        temperature=TEMPERATURE,
+        top_p=TOP_P,
         max_length_sample=MAX_LENGTH_SAMPLE,
         max_length=2048
 ):
@@ -118,16 +120,18 @@ def sample(
 
     with torch.no_grad():
         input_ids = input_ids.to()
+
         tokens = model.generate(
             input_ids,
             do_sample=True,
             num_return_sequences=num_return_sequences,
-            temperature=temp,
+            temperature=temperature,
             max_length=input_ids_len + max_length_sample,
             top_p=top_p,
             pad_token_id=pad_token_id,
             use_cache=True,
         )
+
         text = tokenizer.batch_decode(tokens[:, input_ids_len:, ...])
 
     return text
@@ -190,15 +194,21 @@ class AIXCode:
     def aixcode(self, context_string):
         # sample
         with print_time(f'{context_string} ... AIXCoding >>>'):
-            completion = sample(model=self.model,
-                                tokenizer=self.tokenizer,
-                                context=context_string,
-                                pad_token_id=50256,
-                                num_return_sequences=1,
-                                temp=0.2,
-                                top_p=0.95,
-                                max_length_sample=MAX_LENGTH_SAMPLE)[0]
+            result = sample(model=self.model,
+                            tokenizer=self.tokenizer,
+                            context=context_string,
+                            pad_token_id=50256,
+                            num_return_sequences=NUM_RETURN_SEQUENCES,
+                            temperature=TEMPERATURE,
+                            top_p=TOP_P,
+                            max_length_sample=MAX_LENGTH_SAMPLE)
 
-            truncation = truncate(completion)
+            completion1 = result[0]
+            completion2 = result[1]
+            completion3 = result[2]
 
-            return context_string + truncation
+            truncation1 = truncate(completion1)
+            truncation2 = truncate(completion2)
+            truncation3 = truncate(completion3)
+
+            return f'{context_string} {truncation1} \n\n {context_string} {truncation2} \n\n {context_string} {truncation3} \n\n '
