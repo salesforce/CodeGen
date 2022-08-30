@@ -6,6 +6,7 @@
 
 import tornado.ioloop
 import tornado.web
+import tornado.gen
 import json
 
 from aixcoder.aixcode import AIXCode
@@ -21,10 +22,14 @@ def get_body_json(body):
 
 
 class PingHandler(tornado.web.RequestHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
         print(f'request:{self.request.full_url()}')
         self.write("Pong!")
 
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def post(self):
         body_json = get_body_json(self.request.body)
         print(f'request:{body_json}')
@@ -32,12 +37,16 @@ class PingHandler(tornado.web.RequestHandler):
 
 
 class AIX1Handler(tornado.web.RequestHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
         """get请求"""
         print(f'request:{self.request.full_url()}')
         x = self.get_argument('x')
         self.write(AIXCode1.aixcode(x))
 
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def post(self):
         '''post请求'''
         body_json = get_body_json(self.request.body)
@@ -48,12 +57,16 @@ class AIX1Handler(tornado.web.RequestHandler):
 
 
 class AIX2Handler(tornado.web.RequestHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
         """get请求"""
         print(f'request:{self.request.full_url()}')
         x = self.get_argument('x')
         self.write(AIXCode2.aixcode(x))
 
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def post(self):
         '''post请求'''
         body_json = get_body_json(self.request.body)
