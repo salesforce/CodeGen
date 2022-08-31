@@ -90,11 +90,10 @@ def create_custom_gpt2_tokenizer():
 
 #######################################################################
 # sample params
-MAX_LENGTH_SAMPLE = 512
+MAX_LENGTH_SAMPLE = 640
 TOP_P = 0.95
-TEMPERATURE = 0.7
+TEMPERATURE = 0.618
 NUM_RETURN_SEQUENCES = 3
-
 
 def sample(
         model,
@@ -211,4 +210,4 @@ class AIXCode:
             truncation2 = truncate(completion2)
             truncation3 = truncate(completion3)
 
-            return f'{context_string} {truncation1} \n\n {context_string} {truncation2} \n\n {context_string} {truncation3} \n\n '
+            return f'// AIXCode Output 1:\n{context_string} {truncation1} \n\n// AIXCode Output 2:\n{context_string} {truncation2} \n\n// AIXCode Output 3:\n{context_string} {truncation3} \n\n '
