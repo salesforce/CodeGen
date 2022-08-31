@@ -24,6 +24,14 @@ def get_body_json(body):
 
 
 class PingHandler(tornado.web.RequestHandler):
+    # 解决跨域问题
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")    # 这个地方可以写域名
+        self.set_header("Access-Control-Allow-Headers", "x-requested-with")
+        self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+        self.set_header("Access-Control-Max-Age", 1000)
+        self.set_header("Content-type", "application/json")
+
     @tornado.gen.coroutine
     def get(self):
         print(f'request:{self.request.full_url()}')
@@ -38,6 +46,14 @@ class PingHandler(tornado.web.RequestHandler):
 
 
 class AIX1Handler(tornado.web.RequestHandler):
+    # 解决跨域问题
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")    # 这个地方可以写域名
+        self.set_header("Access-Control-Allow-Headers", "x-requested-with")
+        self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+        self.set_header("Access-Control-Max-Age", 1000)
+        self.set_header("Content-type", "application/json")
+
     executor = ThreadPoolExecutor(32)
 
     @run_on_executor
@@ -66,6 +82,14 @@ class AIX1Handler(tornado.web.RequestHandler):
 
 
 class AIX2Handler(tornado.web.RequestHandler):
+    # 解决跨域问题
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")    # 这个地方可以写域名
+        self.set_header("Access-Control-Allow-Headers", "x-requested-with")
+        self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+        self.set_header("Access-Control-Max-Age", 1000)
+        self.set_header("Content-type", "application/json")
+
     executor = ThreadPoolExecutor(32)
 
     @run_on_executor
