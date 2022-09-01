@@ -245,6 +245,6 @@ class AIXCode:
 
             return f'{comment_sig} aiXCoder Output 1:\n{context_string} {truncation1} \n\n' \
                    f'{comment_sig} aiXCoder Output 2:\n{context_string} {truncation2} \n\n' \
-                   f'{comment_sig} aiXCoder Output 3:\n{context_string} {truncation3} \n\n ' \
-                   f'{comment_sig} aiXCoder Output 4:\n{context_string} {truncation4} \n\n ' \
-                   f'{comment_sig} aiXCoder Output 5:\n{context_string} {truncation5} \n\n '
+                   f'{comment_sig} aiXCoder Output 3:\n{context_string} {truncation3} \n\n' \
+                   f'{comment_sig} aiXCoder Output 4:\n{context_string} {truncation4} \n\n' \
+                   f'{comment_sig} aiXCoder Output 5:\n{context_string} {truncation5} \n\n'
