@@ -93,7 +93,7 @@ def create_custom_gpt2_tokenizer():
 MAX_LENGTH_SAMPLE = 640
 TOP_P = 0.95
 TEMPERATURE = 0.618
-NUM_RETURN_SEQUENCES = 3
+NUM_RETURN_SEQUENCES = 5
 
 
 def sample(
@@ -173,6 +173,9 @@ def truncate(completion):
 
 class AIXCode:
     def __init__(self, model_name):
+
+        self.model_name = model_name
+
         # (0) constants
 
         # `model-size` has 4 options: `350M`, `2B`, `6B`, `16B`, which represent the number of parameters in each model.
@@ -214,7 +217,7 @@ class AIXCode:
 
     def aixcode(self, context_string):
         # sample
-        with print_time(f'{context_string} ... AIXCoding >>>'):
+        with print_time(f'{context_string} ... aiXCoding >>>'):
             result = sample(model=self.model,
                             tokenizer=self.tokenizer,
                             context=context_string,
@@ -227,9 +230,21 @@ class AIXCode:
             completion1 = result[0]
             completion2 = result[1]
             completion3 = result[2]
+            completion4 = result[3]
+            completion5 = result[4]
 
             truncation1 = truncate(completion1)
             truncation2 = truncate(completion2)
             truncation3 = truncate(completion3)
+            truncation4 = truncate(completion4)
+            truncation5 = truncate(completion5)
 
-            return f'// AIXCode Output 1:\n{context_string} {truncation1} \n\n// AIXCode Output 2:\n{context_string} {truncation2} \n\n// AIXCode Output 3:\n{context_string} {truncation3} \n\n '
+            comment_sig = '//'
+            if self.model_name == 'codegen-350M-mono':
+                comment_sig = '#'
+
+            return f'{comment_sig} aiXCoder Output 1:\n{context_string} {truncation1} \n\n' \
+                   f'{comment_sig} aiXCoder Output 2:\n{context_string} {truncation2} \n\n' \
+                   f'{comment_sig} aiXCoder Output 3:\n{context_string} {truncation3} \n\n ' \
+                   f'{comment_sig} aiXCoder Output 4:\n{context_string} {truncation4} \n\n ' \
+                   f'{comment_sig} aiXCoder Output 5:\n{context_string} {truncation5} \n\n '

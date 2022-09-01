@@ -27,7 +27,7 @@
     "text-generation": {
       "do_sample": true,
       "temperature": 1.0,
-      "max_length": 50
+      "max_length": 150
     }
   },
   "torch_dtype": "float16",
