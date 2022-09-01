@@ -15,7 +15,7 @@ from aixcoder.aixcode import AIXCode
 
 AIXCode1 = AIXCode('codegen-350M-multi')
 AIXCode2 = AIXCode('codegen-2B-multi')
-AIXCode3 = AIXCode('codegen-350M-nl')
+AIXCode3 = AIXCode('codegen-350M-mono')
 
 
 def get_body_json(body):

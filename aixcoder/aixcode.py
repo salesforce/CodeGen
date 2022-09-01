@@ -95,6 +95,7 @@ TOP_P = 0.95
 TEMPERATURE = 0.618
 NUM_RETURN_SEQUENCES = 3
 
+
 def sample(
         model,
         tokenizer,
@@ -173,6 +174,16 @@ def truncate(completion):
 class AIXCode:
     def __init__(self, model_name):
         # (0) constants
+
+        # `model-size` has 4 options: `350M`, `2B`, `6B`, `16B`, which represent the number of parameters in each model.
+        #
+        # `data` has 3 options: `nl`, `multi`, `mono`.
+        #
+        # * `nl` models are randomly initialized and trained on [The Pile](https://github.com/EleutherAI/the-pile), a 825.18 GB
+        #   English text corpus.
+        # * `multi` models are initialized from `nl` models and then trained on a corpus with code data consisting of multiple
+        #   programming languages.
+        # * `mono` models are initialized from `multi` models and then trained on a corpus with Python code data.
 
         models_nl = ['codegen-350M-nl', 'codegen-2B-nl', 'codegen-6B-nl', 'codegen-16B-nl']
         models_pl = ['codegen-350M-multi', 'codegen-2B-multi', 'codegen-6B-multi', 'codegen-16B-multi',
