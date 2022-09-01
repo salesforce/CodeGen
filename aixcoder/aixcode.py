@@ -172,6 +172,13 @@ def truncate(completion):
 
 class AIXCode:
     def __init__(self, model_name):
+        # (0) constants
+
+        models_nl = ['codegen-350M-nl', 'codegen-2B-nl', 'codegen-6B-nl', 'codegen-16B-nl']
+        models_pl = ['codegen-350M-multi', 'codegen-2B-multi', 'codegen-6B-multi', 'codegen-16B-multi',
+                     'codegen-350M-mono', 'codegen-2B-mono', 'codegen-6B-mono', 'codegen-16B-mono']
+        models = models_nl + models_pl
+
         # preamble
         set_env()
         set_seed(42, deterministic=True)
@@ -183,7 +190,11 @@ class AIXCode:
             model = create_model(ckpt=ckpt, fp16=False).to()
 
         with print_time(f'{model_name} loading tokenizer'):
-            tokenizer = create_custom_gpt2_tokenizer()
+            if model_name in models_pl:
+                tokenizer = create_custom_gpt2_tokenizer()
+            else:
+                tokenizer = create_tokenizer()
+
             tokenizer.padding_side = 'left'
             tokenizer.pad_token = 50256
 
