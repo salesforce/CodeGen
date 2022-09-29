@@ -33,12 +33,7 @@ sample = model.generate(**inputs, max_length=128)
 print(tokenizer.decode(sample[0], truncate_before_pattern=[r"\n\n^#", "^'''", "\n\n\n"]))
 ```
 
-## Colab
-
-This 
-[Google Colab notebook](https://colab.research.google.com/drive/1fQI8OgzMAR0bquCrvhlAtXSw6iMFbVgI) allows for sampling from the CodeGen models.
-
-## Setup
+## Repository
 ```sh
 git clone https://github.com/salesforce/CodeGen
 cd CodeGen
@@ -97,7 +92,6 @@ If you find our code or paper useful, please cite the paper:
   year={2022}
 }
 ```
-
 
 ## License
 Our code is BSD-3 licensed. See LICENSE.txt for details.
