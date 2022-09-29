@@ -3,7 +3,7 @@
 </p>
 
 # CodeGen
-Official release for the **CodeGen** models (`350M`, `2B`, `6B`, `16B`) for **Program Synthesis** as presented in the paper:
+Official release for the **CodeGen** models (`350M`, `2B`, `6B`, `16B`) for **Program Synthesis** as presented in:
 
 *Title*: [CodeGen: An Open Large Language Model for Code with Multi-Turn Program Synthesis](https://arxiv.org/abs/2203.13474)
 
