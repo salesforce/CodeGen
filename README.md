@@ -5,7 +5,7 @@
 # CodeGen
 Official release for the **CodeGen** models (`350M`, `2B`, `6B`, `16B`) for **Program Synthesis**. That is, the model **translates English into executable code** as presented in the paper:
 
-*Title*: [A Conversational Paradigm for Program Synthesis](https://arxiv.org/abs/2203.13474)
+*Title*: [CodeGen: An Open Large Language Model for Code with Multi-Turn Program Synthesis](https://arxiv.org/abs/2203.13474)
 
 *Authors*: [Erik Nijkamp](https://enijkamp.github.io/)\*, [Bo Pang](https://scholar.google.com/citations?user=s9fNEVEAAAAJ&hl=en)\*, [Hiroaki Hayashi](https://hiroakih.me/)\*, [Lifu Tu](https://home.ttic.edu/~lifu/), [Huan Wang](https://scholar.google.com/citations?user=7NpTttkAAAAJ&hl=en), [Yingbo Zhou](https://scholar.google.com/citations?user=H_6RQ7oAAAAJ&hl=en), [Silvio Savarese](https://scholar.google.com/citations?user=ImpbxLsAAAAJ&hl=en), and [Caiming Xiong](https://scholar.google.com/citations?user=vaSdahkAAAAJ&hl=en) (* indicates equal contribution)
 
@@ -13,7 +13,11 @@ Official release for the **CodeGen** models (`350M`, `2B`, `6B`, `16B`) for **Pr
   <img src="assets/two.gif" width="60%">
 </p>
 
-The current version releases the sampling code, while the detailed training code will be released soon.
+## Training
+
+The Jaxformer library for data pre-processing, training and fine-tuning the CodeGen models can be found here:
+
+https://github.com/salesforce/jaxformer
 
 ## HuggingFace
 
@@ -33,8 +37,6 @@ print(tokenizer.decode(sample[0], truncate_before_pattern=[r"\n\n^#", "^'''", "\
 
 This 
 [Google Colab notebook](https://colab.research.google.com/drive/1fQI8OgzMAR0bquCrvhlAtXSw6iMFbVgI) allows for sampling from the CodeGen models.
-
-
 
 ## Setup
 ```sh
@@ -88,8 +90,8 @@ The model names can be provided to the `--model` flag for `sample.py`. See a sam
 ## Citation
 If you find our code or paper useful, please cite the paper:
 ```bibtex
-@article{Nijkamp2022ACP,
-  title={A Conversational Paradigm for Program Synthesis},
+@article{Nijkamp2022CG,
+  title={CodeGen: An Open Large Language Model for Code with Multi-Turn Program Synthesis},
   author={Nijkamp, Erik and Pang, Bo and Hayashi, Hiroaki and Tu, Lifu and Wang, Huan and Zhou, Yingbo and Savarese, Silvio and Xiong, Caiming},
   journal={arXiv preprint},
   year={2022}
