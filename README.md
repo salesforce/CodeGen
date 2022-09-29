@@ -34,6 +34,9 @@ print(tokenizer.decode(sample[0], truncate_before_pattern=[r"\n\n^#", "^'''", "\
 ```
 
 ## Repository
+
+[Google Colab notebook](https://colab.research.google.com/drive/1fQI8OgzMAR0bquCrvhlAtXSw6iMFbVgI) allows for sampling from the CodeGen models from this repository.
+
 ```sh
 git clone https://github.com/salesforce/CodeGen
 cd CodeGen
