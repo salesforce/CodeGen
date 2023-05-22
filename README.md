@@ -28,6 +28,7 @@ The models are available on the [HuggingFace Hub](https://huggingface.co/models?
 ```python
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
+
 tokenizer = AutoTokenizer.from_pretrained("Salesforce/codegen-2B-mono")
 model = AutoModelForCausalLM.from_pretrained("Salesforce/codegen-2B-mono")
 inputs = tokenizer("# this function prints hello world", return_tensors="pt")
