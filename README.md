@@ -72,6 +72,3 @@ If you find our code or paper useful, please cite the paper:
   year={2023}
 }
 ```
-
-## License
-Our code is BSD-3 licensed. See LICENSE.txt for details.
