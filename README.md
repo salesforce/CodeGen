@@ -3,7 +3,7 @@
 </p>
 
 # CodeGen
-Official release for the **CodeGen1** and **CodeGen2** models (`1B`, `3B`, `7B` `16B`) for **Program Synthesis** by Salesforce AI.
+Official release for the **CodeGen1** and **CodeGen2** models (`350M`, `1B`, `3B`, `7B` `16B`) for **Program Synthesis** by [Salesforce AI](https://www.salesforceairesearch.com/).
 
 <p align="center">
   <img src="assets/two.gif" width="60%">
