@@ -62,14 +62,14 @@ If you find our code or paper useful, please cite the paper:
   title={CodeGen: An Open Large Language Model for Code with Multi-Turn Program Synthesis},
   author={Nijkamp, Erik and Pang, Bo and Hayashi, Hiroaki and Tu, Lifu and Wang, Huan and Zhou, Yingbo and Savarese, Silvio and Xiong, Caiming},
   journal={ICLR},
-  year={2022}
+  year={2023}
 }
 
 @article{nijkamp2023codegen2,
   title={CodeGen2: Lessons for Training LLMs on Programming and Natural Languages},
   author={Nijkamp, Erik and Hayashi, Hiroaki and Xiong, Caiming and Savarese, Silvio and Zhou, Yingbo},
   journal={ICLR},
-  year={2022}
+  year={2023}
 }
 ```
 
