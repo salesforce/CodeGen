@@ -38,7 +38,7 @@ print(tokenizer.decode(sample[0], truncate_before_pattern=[r"\n\n^#", "^'''", "\
 @article{Nijkamp2023codegen2,
   title={CodeGen2: Lessons for Training LLMs on Programming and Natural Languages},
   author={Nijkamp, Erik and Hayashi, Hiroaki and Xiong, Caiming and Savarese, Silvio and Zhou, Yingbo},
-  journal={arXiv preprint},
+  journal={ICLR},
   year={2023}
 }
 ```
