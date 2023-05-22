@@ -3,7 +3,7 @@
 </p>
 
 # CodeGen
-Official release for the **CodeGen1** and **CodeGen2** models (`350M`, `1B`, `2B`, `6B`, `16B`) for **Program Synthesis**.
+Official release for the **CodeGen1** and **CodeGen2** models up to `16B` parameters for **Program Synthesis** by Salesforce AI.
 
 <p align="center">
   <img src="assets/two.gif" width="60%">
