@@ -23,7 +23,7 @@ ICLR, 2023
 
 The models are available on the [HuggingFace Hub](https://huggingface.co/models?search=salesforce+codegen).
 
-**CodeGen1:**
+**CodeGen1**
 
 ```python
 import torch
@@ -35,7 +35,7 @@ sample = model.generate(**inputs, max_length=128)
 print(tokenizer.decode(sample[0], truncate_before_pattern=[r"\n\n^#", "^'''", "\n\n\n"]))
 ```
 
-**CodeGen2:**
+**CodeGen2**
 
 ```python
 import torch
