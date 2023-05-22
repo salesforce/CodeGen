@@ -1,4 +1,4 @@
-# CodeGen2
+# CodeGen1
 
 Official research release for the **CodeGen1** models (`2B`, `6B`, `16B`) for **Program Synthesis** as presented in ICLR 2023:
 
