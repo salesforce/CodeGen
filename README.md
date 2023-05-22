@@ -19,7 +19,7 @@ ICLR, 2023
 [Erik Nijkamp](https://enijkamp.github.io/)\*, [Hiroaki Hayashi](https://hiroakih.me/)\*, [Caiming Xiong](https://scholar.google.com/citations?user=vaSdahkAAAAJ&hl=en), [Silvio Savarese](https://scholar.google.com/citations?user=ImpbxLsAAAAJ&hl=en), and [Yingbo Zhou](https://scholar.google.com/citations?user=H_6RQ7oAAAAJ&hl=en)  
 ICLR, 2023
 
-## Usage with HuggingFace
+## Usage
 
 The models are available on the [HuggingFace Hub](https://huggingface.co/models?search=salesforce+codegen).
 
@@ -49,7 +49,7 @@ sample = model.generate(**inputs, max_length=128)
 print(tokenizer.decode(sample[0], truncate_before_pattern=[r"\n\n^#", "^'''", "\n\n\n"]))
 ```
 
-## Training and Fine-tuning
+## Training
 
 The Jaxformer library for data pre-processing, training and fine-tuning the CodeGen models can be found here:
 
