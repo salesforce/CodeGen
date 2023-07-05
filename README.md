@@ -3,11 +3,25 @@
 </p>
 
 # CodeGen
-Official release for the **CodeGen1** and **CodeGen2** models (`350M`, `1B`, `3B`, `7B` `16B`) for **Program Synthesis** by [Salesforce AI](https://www.salesforceairesearch.com/).
+Official release for the **CodeGen1** and **CodeGen2** models (`350M`, `1B`, `3B`, `7B` `16B`) for **Program Synthesis** by [Salesforce AI Research](https://www.salesforceairesearch.com/).
 
 <p align="center">
   <img src="assets/two.gif" width="60%">
 </p>
+
+## News
+
+**July 2023**
+
+**CodeGen2.5** released outperforming 16B parameter models with only 7B.
+
+**May 2023**
+
+**CodeGen2.0** released with strong infill sampling capability.
+
+**March 2022**
+
+**CodeGen1.0** released on par with OpenAI Codex at the time.
 
 ## Publications
 
@@ -23,7 +37,7 @@ ICLR, 2023
 
 The models are available on the [HuggingFace Hub](https://huggingface.co/models?search=salesforce+codegen).
 
-**CodeGen1**
+**CodeGen1.0**
 
 ```python
 import torch
@@ -36,7 +50,7 @@ sample = model.generate(**inputs, max_length=128)
 print(tokenizer.decode(sample[0], truncate_before_pattern=[r"\n\n^#", "^'''", "\n\n\n"]))
 ```
 
-**CodeGen2**
+**CodeGen2.0**
 
 ```python
 import torch
