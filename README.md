@@ -63,6 +63,19 @@ sample = model.generate(**inputs, max_length=128)
 print(tokenizer.decode(sample[0], truncate_before_pattern=[r"\n\n^#", "^'''", "\n\n\n"]))
 ```
 
+**CodeGen2.5**
+
+```python
+import torch
+from transformers import AutoTokenizer, AutoModelForCausalLM
+
+tokenizer = AutoTokenizer.from_pretrained("Salesforce/codegen25-7b-mono", trust_remote_code=True)
+model = AutoModelForCausalLM.from_pretrained("Salesforce/codegen25-7b-mono")
+inputs = tokenizer("# this function prints hello world", return_tensors="pt")
+sample = model.generate(**inputs, max_length=128)
+print(tokenizer.decode(sample[0]))
+```
+
 ## Training
 
 The Jaxformer library for data pre-processing, training and fine-tuning the CodeGen models can be found here:
