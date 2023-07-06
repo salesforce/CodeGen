@@ -13,7 +13,7 @@ Official release for the **CodeGen1** and **CodeGen2** models (`350M`, `1B`, `3B
 
 **July 2023**
 
-**CodeGen2.5** released outperforming 16B parameter models with only 7B.
+[**CodeGen2.5**](https://github.com/salesforce/CodeGen/tree/main/codegen25) released outperforming 16B parameter models with only 7B.
 
 **May 2023**
 
