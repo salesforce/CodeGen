@@ -16,6 +16,8 @@ Model checkpoints are published at Hugging Face Hub.
 
 Model cards outline how to use the model for causal and infill sampling. Please refer to each model card for more details.
 
+The models are pre-trained on the [StarCoderData](https://huggingface.co/datasets/bigcode/starcoderdata), a programming language dataset developed by BigCode.
+
 ## Requirements
 
 ```
