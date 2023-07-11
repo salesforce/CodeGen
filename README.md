@@ -35,7 +35,7 @@ ICLR, 2023
 
 ## Usage
 
-The models are available on the [HuggingFace Hub](https://huggingface.co/models?search=salesforce+codegen).
+The models are available on the [Hugging Face Hub](https://huggingface.co/models?search=salesforce+codegen).
 
 **CodeGen1.0**
 
