@@ -78,7 +78,7 @@ print(tokenizer.decode(sample[0]))
 
 ## Training
 
-The Jaxformer library for data pre-processing, training and fine-tuning the CodeGen models can be found here:
+The Jaxformer library for data pre-processing, training, and fine-tuning the CodeGen models can be found here:
 
 https://github.com/salesforce/jaxformer
 
