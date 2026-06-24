@@ -1,0 +1,15 @@
+# Configuration for Cog ⚙️
+# Reference: https://github.com/replicate/cog/blob/main/docs/yaml.md
+image: "r8.im/salesforce/codegen"
+build:
+  gpu: true
+  python_version: "3.8"
+  python_packages:
+    - "torch==1.10.0"
+    - "transformers==4.16.2"
+  run: 
+    # run a huggingface import via python, so it is guaranteed to be in the image rather than downloaded at runtime.
+    - python3 -c 'from transformers import GPT2TokenizerFast; t = GPT2TokenizerFast.from_pretrained("gpt2");'
+
+# predict.py is the entrypoint for running a codegen prediction with cog.
+predict: "predict.py:Predictor"
