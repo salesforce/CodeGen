@@ -71,7 +71,7 @@ class CodeGenAttention(nn.Module):
                 1, 1, max_positions, max_positions
             ),
         )
-        self.register_buffer("masked_bias", torch.tensor(-1e9))
+        self.register_buffer("masked_bias", torch.tensor(-1e4))
 
         self.attn_dropout = nn.Dropout(config.attn_pdrop)
         self.resid_dropout = nn.Dropout(config.resid_pdrop)
